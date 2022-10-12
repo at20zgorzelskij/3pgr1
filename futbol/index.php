@@ -1,3 +1,14 @@
+<?php
+    require_once('db.php');
+
+    $pos = $_POST['pos'] ?? null;
+
+    $stmt = $db->prepare('select * from zawodnik, pozycja where zawodnik.pozycja_id = :pozycja AND zawodnik.pozycja_id = pozycja.id');
+    $stmt->execute([
+        ':pozycja' => $pos,
+    ]);
+    $roz = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +30,15 @@
         <div id="below-flex">
             <div>
                 <p>Podaj pozycje zawodników (1-bramkarze, 2-obrońcy, 3-pomocnicy, 4-napastnicy)</p>
-                <input type="number" name="pos" id="pos">
+                <form action="index.php" method="POST">
+                    <input type="number" name="pos" id="pos" min="1" max="4">
+                    <input type="submit">
+                    <ul>
+                    <?php foreach($roz as $row): ?>
+                        <li><?=$row['imie']." ".$row['nazwisko']?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </form>
             </div>
             <div>
                 <img src="zad1.png" alt="zad1">
