@@ -1,0 +1,20 @@
+html, body {
+    margin:0;
+    padding: 0;
+}
+body{
+    background-color: rgb(255, 0, 85);
+}
+#upper{
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+#below{
+    background-color: white;
+}
+#below-flex{
+    display: flex;
+    justify-content: space-between  ;
+}
